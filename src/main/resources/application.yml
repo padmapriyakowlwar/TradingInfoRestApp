@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://localhost:51468;databaseName=trading;integratedSecurity=true;
+    username: BKU\PadmaPriyaKowlwar
+    password: Goodmorning!2020
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+    properties:
+         hibernate:
+             generate_statistics: true
+             format_sql: true
+             dialect: org.hibernate.dialect.SQLServer2012Dialect
+             order_inserts: true
+             jdbc:
+                 batch_size: 10
+
