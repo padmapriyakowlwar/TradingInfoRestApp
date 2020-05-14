@@ -2,8 +2,8 @@ spring:
   datasource:
     driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
     url: jdbc:sqlserver://localhost:51468;databaseName=trading;integratedSecurity=true;
-    username: BKU\PadmaPriyaKowlwar
-    password: Goodmorning!2020
+    username: 
+    password: 
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
