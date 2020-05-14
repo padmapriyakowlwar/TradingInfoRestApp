@@ -1,12 +1,20 @@
 package com.db.tradingstore.model;
 
-import java.sql.Date;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+
 
 /**
  * 
@@ -24,23 +32,30 @@ public class TradingInfo {
 	@Column(name = "Id")
 	private Integer Id;
 	
+	@NotBlank(message = "Tradeid is mandatory")
 	@Column(name = "Tradeid")
-	private String tradeId;
+    private String tradeId;
 	
+	@Positive 
 	@Column(name = "Version")
 	private int version;
 	
+	@NotBlank(message = "Counterpartyid is mandatory")
 	@Column(name = "Counterpartyid")
 	private String counterPartyId;
 	
+	@NotBlank(message = "Bookid is mandatory")
 	@Column(name = "Bookid")
 	private String  bookId;
-
+	
+	@FutureOrPresent(message = "Maturitydate should be present or future date")
 	@Column(name = "Maturitydate")
 	private Date maturityDate;
 	
+	@PastOrPresent(message = "Createddate should be past or present date")
 	@Column(name = "Createddate")
 	private Date createdDate;
+
 	
 	@Column(name = "Expired")
 	private boolean expired;

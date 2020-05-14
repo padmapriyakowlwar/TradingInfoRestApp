@@ -11,7 +11,9 @@ import com.db.tradingstore.model.TradingInfo;
 @Component
 public interface TradingInfoJpaRespository extends JpaRepository<TradingInfo, Integer>{
 
-	TradingInfo findByTradeId(String tradeId, Sort sort);
+	//TradingInfo findByTradeId(String tradeId, Sort sort);
+	
+	List<TradingInfo> findByTradeId(String tradeId);
 	
 	List<TradingInfo> findAllByTradeIdOrderByVersionDesc(String tradeId);
 }

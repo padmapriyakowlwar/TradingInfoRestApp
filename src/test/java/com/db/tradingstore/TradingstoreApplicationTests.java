@@ -44,34 +44,25 @@ public class TradingstoreApplicationTests {
 		
 		TradingInfo ti = new TradingInfo("T1", 1, "CP-1", "B1", new Date(2020, 05, 13), new Date(2020, 05, 13),true);
 		List<TradingInfo> tradeList = Collections.singletonList(ti);
-		BDDMockito.given(tradingInfoJpaRepository.findByTradeId("T1", Sort.unsorted())).willReturn(ti);
+		BDDMockito.given(tradingInfoJpaRepository.findByTradeId("T1")).willReturn(tradeList);
 		
 		//Mockito.when(tradingInfoJpaRepository.findAll()).thenReturn((List<TradingInfo>) new TradingInfo("T1", 1, "CP-1", "B1", new Date(2020, 05, 13), new Date(2020, 05, 13),true));
 		
 		try {
 			MvcResult mvcResult = mockMvc.perform(
-					MockMvcRequestBuilders.post("/tradinginformation/getBytradeId")
+					MockMvcRequestBuilders.get("/tradinginformation/load/T1")
 					.contentType(MediaType.APPLICATION_JSON)
-					.content("{\r\n" + 
-							"        \"tradeId\": \"T1\",\r\n" + 
-							"        \"version\": 1,\r\n" + 
-							"        \"counterPartyId\": \"CP-1\",\r\n" + 
-							"        \"bookId\": \"B3\",\r\n" + 
-							"        \"maturityDate\": \"2020-05-13\",\r\n" + 
-							"        \"createdDate\": \"2020-05-12\",\r\n" + 
-							"        \"expired\": true\r\n" + 
-							"    }")
 					.characterEncoding("UTF-8")
 					)
 					.andExpect(MockMvcResultMatchers.status().isOk())
-					.andExpect(MockMvcResultMatchers.jsonPath("tradeId").value("T1"))
+					.andExpect(MockMvcResultMatchers.jsonPath("$..tradeId").value("T1"))
 					.andReturn();
 			System.out.println(mvcResult.getResponse());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Mockito.verify(tradingInfoJpaRepository).findByTradeId(ti.getTradeId(), Sort.unsorted());
+		Mockito.verify(tradingInfoJpaRepository).findByTradeId(ti.getTradeId());
 	}
 
 }
